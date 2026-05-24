@@ -1,0 +1,233 @@
+import lahore from "@/assets/dest-lahore.jpg";
+import islamabad from "@/assets/dest-islamabad.jpg";
+import hunza from "@/assets/dest-hunza.jpg";
+import dubai from "@/assets/dest-dubai.jpg";
+import turkey from "@/assets/dest-turkey.jpg";
+import thailand from "@/assets/dest-thailand.jpg";
+
+export type Destination = {
+  id: string;
+  city: string;
+  country: string;
+  region: "Pakistan" | "International";
+  image: string;
+  tagline: string;
+  bestSeason: string;
+  estCost: string;
+  weather: string;
+  highlights: string[];
+  hotels: string[];
+  restaurants: string[];
+  transport: string;
+  // International extras
+  visa?: string;
+  flight?: string;
+  currency?: string;
+  tips?: string[];
+};
+
+export const destinations: Destination[] = [
+  {
+    id: "hunza",
+    city: "Hunza",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: hunza,
+    tagline: "Turquoise lakes beneath the Karakoram",
+    bestSeason: "April – October",
+    estCost: "PKR 45,000 / 4 days",
+    weather: "8–22°C, crisp alpine air",
+    highlights: ["Attabad Lake", "Baltit Fort", "Passu Cones", "Khunjerab Pass"],
+    hotels: ["Serena Inn Hunza", "Luxus Hunza", "Hard Rock Hunza"],
+    restaurants: ["Café de Hunza", "Glacier Breeze", "Cafe Tibet"],
+    transport: "Fly to Gilgit, then 2.5h scenic drive on KKH",
+  },
+  {
+    id: "lahore",
+    city: "Lahore",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: lahore,
+    tagline: "Mughal heritage and street food capital",
+    bestSeason: "October – March",
+    estCost: "PKR 25,000 / 3 days",
+    weather: "12–28°C, dry winters",
+    highlights: ["Badshahi Mosque", "Lahore Fort", "Food Street", "Wagah Border"],
+    hotels: ["Pearl Continental", "Avari", "Nishat Lahore"],
+    restaurants: ["Andaaz", "Cooco's Den", "Haveli"],
+    transport: "Direct flights & motorway access",
+  },
+  {
+    id: "islamabad",
+    city: "Islamabad",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: islamabad,
+    tagline: "Capital of green hills and clean boulevards",
+    bestSeason: "September – April",
+    estCost: "PKR 30,000 / 3 days",
+    weather: "10–25°C",
+    highlights: ["Faisal Mosque", "Margalla Hills", "Daman-e-Koh", "Pakistan Monument"],
+    hotels: ["Serena Islamabad", "Marriott", "Roomy Signature"],
+    restaurants: ["Monal", "Tuscany Courtyard", "Des Pardes"],
+    transport: "Islamabad Intl Airport, Metro Bus",
+  },
+  {
+    id: "skardu",
+    city: "Skardu",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: hunza,
+    tagline: "Gateway to K2 and the cold deserts",
+    bestSeason: "May – September",
+    estCost: "PKR 55,000 / 5 days",
+    weather: "5–20°C",
+    highlights: ["Shangrila Resort", "Shigar Fort", "Deosai Plains", "Sheosar Lake"],
+    hotels: ["Shangrila Resort", "Mantokhel Inn", "Byarsa Hotel"],
+    restaurants: ["Dewanekhas", "Mehfil Restaurant"],
+    transport: "Daily PIA flight from Islamabad",
+  },
+  {
+    id: "murree",
+    city: "Murree",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: islamabad,
+    tagline: "Pine-scented hill station near Islamabad",
+    bestSeason: "Year-round",
+    estCost: "PKR 18,000 / 2 days",
+    weather: "0–18°C",
+    highlights: ["Mall Road", "Patriata Chairlift", "Pindi Point"],
+    hotels: ["Pearl Continental Bhurban", "Shangrila Murree"],
+    restaurants: ["Lockwood Kitchen", "Red Onion"],
+    transport: "1.5h drive from Islamabad",
+  },
+  {
+    id: "swat",
+    city: "Swat",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: hunza,
+    tagline: "Switzerland of the East",
+    bestSeason: "April – October",
+    estCost: "PKR 35,000 / 4 days",
+    weather: "10–24°C",
+    highlights: ["Malam Jabba", "Kalam Valley", "Mahodand Lake"],
+    hotels: ["Serena Swat", "Rock City Resort"],
+    restaurants: ["Swat Continental", "White Palace"],
+    transport: "Fly Saidu Sharif or 5h drive from Islamabad",
+  },
+  {
+    id: "karachi",
+    city: "Karachi",
+    country: "Pakistan",
+    region: "Pakistan",
+    image: lahore,
+    tagline: "City of lights by the Arabian Sea",
+    bestSeason: "November – February",
+    estCost: "PKR 28,000 / 3 days",
+    weather: "20–32°C",
+    highlights: ["Clifton Beach", "Mohatta Palace", "Port Grand"],
+    hotels: ["Mövenpick", "Marriott Karachi", "Avari Towers"],
+    restaurants: ["Kolachi", "BBQ Tonight", "Xander's"],
+    transport: "Jinnah International Airport",
+  },
+  {
+    id: "dubai",
+    city: "Dubai",
+    country: "UAE",
+    region: "International",
+    image: dubai,
+    tagline: "Skyline of dreams and golden dunes",
+    bestSeason: "November – March",
+    estCost: "USD 1,200 / 5 days",
+    weather: "20–30°C in winter",
+    highlights: ["Burj Khalifa", "Desert Safari", "Palm Jumeirah", "Dubai Mall"],
+    hotels: ["Atlantis The Palm", "Address Downtown", "Rove Dubai Marina"],
+    restaurants: ["At.mosphere", "Pierchic", "Ravi Restaurant"],
+    transport: "Metro, taxis, ride-hailing",
+    visa: "E-visa on arrival for Pakistani passport via approved agents",
+    flight: "~3h direct from Karachi/Lahore, ~USD 350 round trip",
+    currency: "AED — 1 USD ≈ 3.67 AED",
+    tips: ["Dress modestly in public areas", "Friday is the holy day", "Tap water is safe"],
+  },
+  {
+    id: "turkey",
+    city: "Istanbul & Cappadocia",
+    country: "Turkey",
+    region: "International",
+    image: turkey,
+    tagline: "Where continents and centuries meet",
+    bestSeason: "April – June, September – October",
+    estCost: "USD 1,500 / 7 days",
+    weather: "15–25°C in spring",
+    highlights: ["Hagia Sophia", "Blue Mosque", "Cappadocia balloons", "Bosphorus cruise"],
+    hotels: ["Four Seasons Sultanahmet", "Museum Hotel Cappadocia"],
+    restaurants: ["Mikla", "Çiya Sofrası", "Topdeck Cave"],
+    transport: "Trams, ferries, domestic flights",
+    visa: "E-visa online in 15 minutes",
+    flight: "~6h direct, ~USD 600 round trip",
+    currency: "TRY — fluctuating, carry USD/EUR",
+    tips: ["Bargain in Grand Bazaar", "Try Turkish breakfast", "Book balloon ride in advance"],
+  },
+  {
+    id: "thailand",
+    city: "Bangkok & Phuket",
+    country: "Thailand",
+    region: "International",
+    image: thailand,
+    tagline: "Temples, beaches, and street-food paradise",
+    bestSeason: "November – February",
+    estCost: "USD 1,100 / 7 days",
+    weather: "25–32°C",
+    highlights: ["Phi Phi Islands", "Grand Palace", "Chatuchak Market", "Patong Beach"],
+    hotels: ["Mandarin Oriental Bangkok", "Keemala Phuket"],
+    restaurants: ["Gaggan Anand", "Jay Fai", "Raya"],
+    transport: "BTS Skytrain, tuk-tuks, domestic flights",
+    visa: "Visa-free for many; e-visa for Pakistani passport",
+    flight: "~6h via Dubai/Doha, ~USD 700 round trip",
+    currency: "THB — 1 USD ≈ 36 THB",
+    tips: ["Respect temple dress code", "Try street food in Yaowarat", "Avoid tap water"],
+  },
+  {
+    id: "malaysia",
+    city: "Kuala Lumpur",
+    country: "Malaysia",
+    region: "International",
+    image: thailand,
+    tagline: "Modern skyline meets tropical jungle",
+    bestSeason: "December – February",
+    estCost: "USD 1,000 / 6 days",
+    weather: "24–32°C, humid",
+    highlights: ["Petronas Towers", "Batu Caves", "Langkawi", "Penang food"],
+    hotels: ["Mandarin Oriental KL", "The RuMa Hotel"],
+    restaurants: ["Nadodi", "Jalan Alor street food"],
+    transport: "Monorail, Grab, KLIA Ekspres",
+    visa: "Visa-free entry for Pakistani passport (15 days)",
+    flight: "~7h direct, ~USD 650",
+    currency: "MYR — 1 USD ≈ 4.7 MYR",
+    tips: ["Halal food everywhere", "Bring umbrella for monsoon"],
+  },
+  {
+    id: "saudi-arabia",
+    city: "Makkah & Madinah",
+    country: "Saudi Arabia",
+    region: "International",
+    image: dubai,
+    tagline: "Sacred journey through Islamic heritage",
+    bestSeason: "October – March",
+    estCost: "USD 1,800 / 10 days",
+    weather: "20–32°C in winter",
+    highlights: ["Masjid al-Haram", "Masjid Nabawi", "Quba Mosque", "Jabal al-Noor"],
+    hotels: ["Fairmont Makkah Clock Tower", "Anwar Al Madinah Mövenpick"],
+    restaurants: ["Al Tazaj", "Al Baik", "Najd Village"],
+    transport: "Haramain high-speed train, taxis",
+    visa: "Umrah visa via approved travel agents",
+    flight: "~4h direct, ~USD 500",
+    currency: "SAR — 1 USD ≈ 3.75 SAR",
+    tips: ["Carry Ihram", "Stay hydrated", "Respect prayer times"],
+  },
+];
+
+export const pakistanCities = destinations.filter((d) => d.region === "Pakistan");
+export const internationalCities = destinations.filter((d) => d.region === "International");
