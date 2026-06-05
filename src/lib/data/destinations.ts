@@ -53,7 +53,7 @@ type Seed = Omit<Destination, "image" | "gallery"> & {
 
 const make = (s: Seed): Destination => ({
   ...s,
-  image: s.image ?? ux(`${s.city},${s.country},travel`, 1600, 1100),
+  image: s.image ?? ux(`${s.city},${s.country},travel`, 1600, 1100, `${s.id}-hero`),
   gallery: s.gallery ?? galleryFor(`${s.city} ${s.country}`, defaultThemes),
 });
 
