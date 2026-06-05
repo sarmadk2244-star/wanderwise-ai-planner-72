@@ -6,14 +6,16 @@ import turkey from "@/assets/dest-turkey.jpg";
 import thailand from "@/assets/dest-thailand.jpg";
 
 /**
- * Returns a URL pointing at a real Unsplash photo for a given themed query.
- * Uses Unsplash's source endpoint which redirects to a relevant photo.
+ * Returns a URL to a real Flickr photo matching the tag.
+ * LoremFlickr searches Flickr's CC-licensed pool by tag and returns a relevant image.
  */
-const ux = (query: string, w = 1600, h = 1000) =>
-  `https://source.unsplash.com/${w}x${h}/?${encodeURIComponent(query)}`;
+const ux = (tags: string, w = 1600, h = 1000, lockSeed?: string) => {
+  const base = `https://loremflickr.com/${w}/${h}/${encodeURIComponent(tags)}/all`;
+  return lockSeed ? `${base}?lock=${encodeURIComponent(lockSeed)}` : base;
+};
 
 const galleryFor = (city: string, themes: string[]) =>
-  themes.map((t) => ux(`${city},${t}`, 1400, 900));
+  themes.map((t, i) => ux(`${city},${t}`, 1400, 900, `${city}-${t}-${i}`));
 
 const defaultThemes = ["landscape", "food", "market", "architecture", "night", "culture"];
 
