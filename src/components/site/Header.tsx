@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Compass, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
 const links = [
   { to: "/", label: "Home" },
@@ -34,14 +35,18 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <div className="hidden md:block">
+          <div className="hidden items-center gap-2 md:flex">
+            <ThemeToggle />
             <Button asChild className="rounded-full bg-gradient-sunset text-primary-foreground shadow-glow hover:opacity-95">
               <Link to="/planner">Plan a trip</Link>
             </Button>
           </div>
-          <button className="md:hidden" onClick={() => setOpen((s) => !s)} aria-label="Menu">
-            {open ? <X /> : <Menu />}
-          </button>
+          <div className="flex items-center gap-2 md:hidden">
+            <ThemeToggle />
+            <button onClick={() => setOpen((s) => !s)} aria-label="Menu">
+              {open ? <X /> : <Menu />}
+            </button>
+          </div>
         </div>
         {open && (
           <div className="glass mt-2 flex flex-col gap-1 rounded-3xl p-3 md:hidden">
