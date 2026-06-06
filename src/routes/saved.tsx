@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSaved } from "@/lib/bookings";
 import { Button } from "@/components/ui/button";
-import { Bookmark, ExternalLink, Trash2, Hotel, Plane, Bus, MapPin } from "lucide-react";
+import { Bookmark, ExternalLink, Trash2, Hotel, Plane, Bus, MapPin, Cloud, CloudOff } from "lucide-react";
 
 export const Route = createFileRoute("/saved")({
   component: SavedPage,
@@ -28,7 +28,7 @@ const typeLabel = {
 } as const;
 
 function SavedPage() {
-  const { items, remove, clear } = useSaved();
+  const { items, remove, clear, isSynced } = useSaved();
 
   const grouped = {
     hotel: items.filter((i) => i.type === "hotel"),
@@ -52,6 +52,22 @@ function SavedPage() {
         {items.length > 0 && (
           <Button variant="outline" className="rounded-full" onClick={clear}>
             <Trash2 className="mr-2 h-4 w-4" /> Clear all
+          </Button>
+        )}
+      </div>
+
+      <div className={`mt-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4 ${isSynced ? "border-primary/30 bg-primary/5" : "border-border bg-card"}`}>
+        <div className="flex items-center gap-3 text-sm">
+          {isSynced ? <Cloud className="h-5 w-5 text-primary" /> : <CloudOff className="h-5 w-5 text-muted-foreground" />}
+          <span>
+            {isSynced
+              ? "Cloud sync is on — your saved trips are available on every device you sign in to."
+              : "You're browsing offline. Sign in to sync your saved trips across devices."}
+          </span>
+        </div>
+        {!isSynced && (
+          <Button asChild size="sm" className="rounded-full bg-gradient-sunset text-primary-foreground">
+            <Link to="/auth" search={{ redirect: "/saved" }}>Sign in to sync</Link>
           </Button>
         )}
       </div>

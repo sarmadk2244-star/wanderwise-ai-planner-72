@@ -13,6 +13,7 @@ import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as HotelsRouteImport } from './routes/hotels'
 import { Route as DestinationsRouteImport } from './routes/destinations'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
 
@@ -36,6 +37,11 @@ const DestinationsRoute = DestinationsRouteImport.update({
   path: '/destinations',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -49,6 +55,7 @@ const DestinationsIdRoute = DestinationsIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
@@ -57,6 +64,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
@@ -66,6 +74,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
@@ -76,6 +85,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/destinations'
     | '/hotels'
     | '/planner'
@@ -84,6 +94,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/destinations'
     | '/hotels'
     | '/planner'
@@ -92,6 +103,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/destinations'
     | '/hotels'
     | '/planner'
@@ -101,6 +113,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   DestinationsRoute: typeof DestinationsRouteWithChildren
   HotelsRoute: typeof HotelsRoute
   PlannerRoute: typeof PlannerRoute
@@ -137,6 +150,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -168,6 +188,7 @@ const DestinationsRouteWithChildren = DestinationsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   DestinationsRoute: DestinationsRouteWithChildren,
   HotelsRoute: HotelsRoute,
   PlannerRoute: PlannerRoute,
