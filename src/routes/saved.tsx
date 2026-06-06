@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSaved } from "@/lib/bookings";
 import { Button } from "@/components/ui/button";
-import { Bookmark, ExternalLink, Trash2, Hotel, Plane, Bus, MapPin } from "lucide-react";
+import { Bookmark, ExternalLink, Trash2, Hotel, Plane, Bus, MapPin, Cloud, CloudOff } from "lucide-react";
 
 export const Route = createFileRoute("/saved")({
   component: SavedPage,
@@ -28,7 +28,7 @@ const typeLabel = {
 } as const;
 
 function SavedPage() {
-  const { items, remove, clear } = useSaved();
+  const { items, remove, clear, isSynced } = useSaved();
 
   const grouped = {
     hotel: items.filter((i) => i.type === "hotel"),
