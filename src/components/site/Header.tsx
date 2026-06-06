@@ -1,18 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Menu, X } from "lucide-react";
+import { Compass, Menu, X, Bookmark } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
+import { useSaved } from "@/lib/bookings";
 
 const links = [
   { to: "/", label: "Home" },
   { to: "/destinations", label: "Destinations" },
   { to: "/hotels", label: "Hotels" },
   { to: "/planner", label: "AI Planner" },
+  { to: "/saved", label: "Saved" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const { items } = useSaved();
+  const savedCount = items.length;
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="mx-auto mt-4 max-w-7xl px-4">
@@ -37,6 +41,14 @@ export function Header() {
           </nav>
           <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
+            <Link to="/saved" className="relative grid h-9 w-9 place-items-center rounded-full hover:bg-accent" aria-label="Save Center">
+              <Bookmark className="h-4 w-4" />
+              {savedCount > 0 && (
+                <span className="absolute -right-1 -top-1 grid h-4 min-w-4 place-items-center rounded-full bg-gradient-sunset px-1 text-[10px] font-medium text-primary-foreground">
+                  {savedCount}
+                </span>
+              )}
+            </Link>
             <Button asChild className="rounded-full bg-gradient-sunset text-primary-foreground shadow-glow hover:opacity-95">
               <Link to="/planner">Plan a trip</Link>
             </Button>
