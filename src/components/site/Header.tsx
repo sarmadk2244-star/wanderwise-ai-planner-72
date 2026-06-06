@@ -1,9 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Menu, X, Bookmark } from "lucide-react";
+import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useSaved } from "@/lib/bookings";
+import { useAuthUser } from "@/hooks/use-auth-user";
+import { toast } from "sonner";
 
 const links = [
   { to: "/", label: "Home" },
@@ -16,7 +18,12 @@ const links = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const { items } = useSaved();
+  const { user, signOut } = useAuthUser();
   const savedCount = items.length;
+  const handleSignOut = async () => {
+    await signOut();
+    toast.success("Signed out");
+  };
   return (
     <header className="sticky top-0 z-50 w-full">
       <div className="mx-auto mt-4 max-w-7xl px-4">
@@ -49,6 +56,15 @@ export function Header() {
                 </span>
               )}
             </Link>
+            {user ? (
+              <Button variant="outline" size="sm" className="rounded-full" onClick={handleSignOut} title={user.email ?? ""}>
+                <LogOut className="mr-1.5 h-3.5 w-3.5" /> Sign out
+              </Button>
+            ) : (
+              <Button asChild variant="outline" size="sm" className="rounded-full">
+                <Link to="/auth"><UserIcon className="mr-1.5 h-3.5 w-3.5" /> Sign in</Link>
+              </Button>
+            )}
             <Button asChild className="rounded-full bg-gradient-sunset text-primary-foreground shadow-glow hover:opacity-95">
               <Link to="/planner">Plan a trip</Link>
             </Button>
