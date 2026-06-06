@@ -56,6 +56,22 @@ function SavedPage() {
         )}
       </div>
 
+      <div className={`mt-8 flex flex-wrap items-center justify-between gap-3 rounded-2xl border p-4 ${isSynced ? "border-primary/30 bg-primary/5" : "border-border bg-card"}`}>
+        <div className="flex items-center gap-3 text-sm">
+          {isSynced ? <Cloud className="h-5 w-5 text-primary" /> : <CloudOff className="h-5 w-5 text-muted-foreground" />}
+          <span>
+            {isSynced
+              ? "Cloud sync is on — your saved trips are available on every device you sign in to."
+              : "You're browsing offline. Sign in to sync your saved trips across devices."}
+          </span>
+        </div>
+        {!isSynced && (
+          <Button asChild size="sm" className="rounded-full bg-gradient-sunset text-primary-foreground">
+            <Link to="/auth" search={{ redirect: "/saved" }}>Sign in to sync</Link>
+          </Button>
+        )}
+      </div>
+
       {items.length === 0 ? (
         <div className="mt-20 rounded-3xl border border-dashed border-border bg-card p-12 text-center">
           <Bookmark className="mx-auto h-10 w-10 text-muted-foreground" />
