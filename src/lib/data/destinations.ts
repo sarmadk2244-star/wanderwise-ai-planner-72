@@ -17,7 +17,7 @@ const ux = (tags: string, w = 1600, h = 1000, lockSeed?: string) => {
 const galleryFor = (city: string, themes: string[]) =>
   themes.map((t, i) => ux(`${city},${t}`, 1400, 900, `${city}-${t}-${i}`));
 
-const defaultThemes = ["landscape", "food", "market", "architecture", "night", "culture"];
+const defaultThemes = ["famous landmark", "scenic viewpoint", "street food", "traditional culture", "old town architecture", "festival people"];
 
 export type Destination = {
   id: string;
