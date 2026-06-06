@@ -186,6 +186,11 @@ function DestinationPage() {
           </div>
         </section>
 
+        {/* Booking & transport */}
+        <BookingPanel d={d} />
+
+
+
         {/* CTA */}
         <section className="mt-20 overflow-hidden rounded-4xl bg-gradient-aurora p-10 text-white shadow-glow md:p-16">
           <h2 className="font-display text-4xl md:text-5xl">Ready to go to {d.city}?</h2>
