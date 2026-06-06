@@ -1,11 +1,19 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import {
+  listSavedItems,
+  upsertSavedItem,
+  deleteSavedItem,
+  bulkUpsertSavedItems,
+  clearSavedItems,
+} from "@/lib/saved-items.functions";
 
 export type SavedItem = {
-  id: string;            // unique key
+  id: string;            // item_key
   type: "hotel" | "flight" | "transport" | "destination";
   title: string;
   subtitle?: string;
-  url?: string;          // external booking URL
+  url?: string;
   image?: string;
   meta?: Record<string, string | number>;
   savedAt: number;
@@ -13,7 +21,7 @@ export type SavedItem = {
 
 const KEY = "wayfarer:saved";
 
-function read(): SavedItem[] {
+function readLocal(): SavedItem[] {
   if (typeof window === "undefined") return [];
   try {
     return JSON.parse(localStorage.getItem(KEY) ?? "[]");
@@ -22,40 +30,147 @@ function read(): SavedItem[] {
   }
 }
 
-function write(items: SavedItem[]) {
+function writeLocal(items: SavedItem[]) {
   localStorage.setItem(KEY, JSON.stringify(items));
   window.dispatchEvent(new CustomEvent("wayfarer:saved-change"));
 }
 
+function rowToItem(r: {
+  item_key: string;
+  type: SavedItem["type"];
+  title: string;
+  subtitle: string | null;
+  url: string | null;
+  image: string | null;
+  meta: Record<string, unknown> | null;
+  created_at: string;
+}): SavedItem {
+  return {
+    id: r.item_key,
+    type: r.type,
+    title: r.title,
+    subtitle: r.subtitle ?? undefined,
+    url: r.url ?? undefined,
+    image: r.image ?? undefined,
+    meta: (r.meta as Record<string, string | number>) ?? undefined,
+    savedAt: new Date(r.created_at).getTime(),
+  };
+}
+
+function itemToInput(i: SavedItem) {
+  return {
+    item_key: i.id,
+    type: i.type,
+    title: i.title,
+    subtitle: i.subtitle,
+    url: i.url,
+    image: i.image,
+    meta: i.meta,
+  };
+}
+
 export function useSaved() {
   const [items, setItems] = useState<SavedItem[]>([]);
+  const [userId, setUserId] = useState<string | null>(null);
+  const mergedRef = useRef(false);
 
+  // Track auth state
   useEffect(() => {
-    setItems(read());
-    const refresh = () => setItems(read());
-    window.addEventListener("wayfarer:saved-change", refresh);
-    window.addEventListener("storage", refresh);
+    let active = true;
+    supabase.auth.getUser().then(({ data }) => {
+      if (active) setUserId(data.user?.id ?? null);
+    });
+    const { data: sub } = supabase.auth.onAuthStateChange((event, session) => {
+      if (!active) return;
+      setUserId(session?.user?.id ?? null);
+      if (event === "SIGNED_OUT") mergedRef.current = false;
+    });
     return () => {
-      window.removeEventListener("wayfarer:saved-change", refresh);
-      window.removeEventListener("storage", refresh);
+      active = false;
+      sub.subscription.unsubscribe();
     };
   }, []);
 
-  const save = useCallback((item: Omit<SavedItem, "savedAt">) => {
-    const current = read();
-    if (current.some((x) => x.id === item.id)) return;
-    write([{ ...item, savedAt: Date.now() }, ...current]);
-  }, []);
+  // Initial load + sync when auth changes
+  useEffect(() => {
+    let active = true;
+    setItems(readLocal());
 
-  const remove = useCallback((id: string) => {
-    write(read().filter((x) => x.id !== id));
-  }, []);
+    const refreshLocal = () => active && setItems(readLocal());
+    window.addEventListener("wayfarer:saved-change", refreshLocal);
+    window.addEventListener("storage", refreshLocal);
+
+    if (userId) {
+      (async () => {
+        try {
+          // One-time merge of local-only items into cloud on first sign-in
+          const local = readLocal();
+          if (!mergedRef.current && local.length > 0) {
+            await bulkUpsertSavedItems({ data: { items: local.map(itemToInput) } });
+            mergedRef.current = true;
+          }
+          const res = await listSavedItems();
+          if (!active) return;
+          const cloud = res.items.map(rowToItem);
+          writeLocal(cloud);
+        } catch (err) {
+          console.warn("Cloud sync failed; using local copy", err);
+        }
+      })();
+    }
+
+    return () => {
+      active = false;
+      window.removeEventListener("wayfarer:saved-change", refreshLocal);
+      window.removeEventListener("storage", refreshLocal);
+    };
+  }, [userId]);
+
+  const save = useCallback(
+    async (item: Omit<SavedItem, "savedAt">) => {
+      const current = readLocal();
+      if (current.some((x) => x.id === item.id)) return;
+      const full: SavedItem = { ...item, savedAt: Date.now() };
+      writeLocal([full, ...current]);
+      if (userId) {
+        try {
+          await upsertSavedItem({ data: itemToInput(full) });
+        } catch (err) {
+          console.warn("Cloud save failed", err);
+        }
+      }
+    },
+    [userId]
+  );
+
+  const remove = useCallback(
+    async (id: string) => {
+      writeLocal(readLocal().filter((x) => x.id !== id));
+      if (userId) {
+        try {
+          await deleteSavedItem({ data: { item_key: id } });
+        } catch (err) {
+          console.warn("Cloud delete failed", err);
+        }
+      }
+    },
+    [userId]
+  );
 
   const has = useCallback((id: string) => items.some((x) => x.id === id), [items]);
 
-  const clear = useCallback(() => write([]), []);
+  const clear = useCallback(async () => {
+    writeLocal([]);
+    if (userId) {
+      try {
+        await clearSavedItems();
+      } catch (err) {
+        console.warn("Cloud clear failed", err);
+      }
+    }
+  }, [userId]);
 
-  return { items, save, remove, has, clear };
+  return { items, save, remove, has, clear, isSynced: !!userId };
 }
 
 // --- Booking URL helpers (external partners, deep links) ---
