@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Gallery } from "@/components/site/Gallery";
+import { BookingPanel } from "@/components/site/BookingPanel";
 
 export const Route = createFileRoute("/destinations/$id")({
   loader: ({ params }) => {
