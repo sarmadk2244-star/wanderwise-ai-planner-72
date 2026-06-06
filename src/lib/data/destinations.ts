@@ -17,7 +17,7 @@ const ux = (tags: string, w = 1600, h = 1000, lockSeed?: string) => {
 const galleryFor = (city: string, themes: string[]) =>
   themes.map((t, i) => ux(`${city},${t}`, 1400, 900, `${city}-${t}-${i}`));
 
-const defaultThemes = ["landscape", "food", "market", "architecture", "night", "culture"];
+const defaultThemes = ["famous landmark", "scenic viewpoint", "street food", "traditional culture", "old town architecture", "festival people"];
 
 export type Destination = {
   id: string;
@@ -53,7 +53,7 @@ type Seed = Omit<Destination, "image" | "gallery"> & {
 
 const make = (s: Seed): Destination => ({
   ...s,
-  image: s.image ?? ux(`${s.city},${s.country},travel`, 1600, 1100, `${s.id}-hero`),
+  image: s.image ?? ux(`${s.city},${s.country},famous landmark`, 1600, 1100, `${s.id}-hero`),
   gallery: s.gallery ?? galleryFor(`${s.city} ${s.country}`, defaultThemes),
 });
 

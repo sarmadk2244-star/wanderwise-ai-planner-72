@@ -9,12 +9,18 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as HotelsRouteImport } from './routes/hotels'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
 
+const SavedRoute = SavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlannerRoute = PlannerRouteImport.update({
   id: '/planner',
   path: '/planner',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
+  '/saved': typeof SavedRoute
   '/destinations/$id': typeof DestinationsIdRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
+  '/saved': typeof SavedRoute
   '/destinations/$id': typeof DestinationsIdRoute
 }
 export interface FileRoutesById {
@@ -61,6 +69,7 @@ export interface FileRoutesById {
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
+  '/saved': typeof SavedRoute
   '/destinations/$id': typeof DestinationsIdRoute
 }
 export interface FileRouteTypes {
@@ -70,15 +79,23 @@ export interface FileRouteTypes {
     | '/destinations'
     | '/hotels'
     | '/planner'
+    | '/saved'
     | '/destinations/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/destinations' | '/hotels' | '/planner' | '/destinations/$id'
+  to:
+    | '/'
+    | '/destinations'
+    | '/hotels'
+    | '/planner'
+    | '/saved'
+    | '/destinations/$id'
   id:
     | '__root__'
     | '/'
     | '/destinations'
     | '/hotels'
     | '/planner'
+    | '/saved'
     | '/destinations/$id'
   fileRoutesById: FileRoutesById
 }
@@ -87,10 +104,18 @@ export interface RootRouteChildren {
   DestinationsRoute: typeof DestinationsRouteWithChildren
   HotelsRoute: typeof HotelsRoute
   PlannerRoute: typeof PlannerRoute
+  SavedRoute: typeof SavedRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/saved': {
+      id: '/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof SavedRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/planner': {
       id: '/planner'
       path: '/planner'
@@ -146,6 +171,7 @@ const rootRouteChildren: RootRouteChildren = {
   DestinationsRoute: DestinationsRouteWithChildren,
   HotelsRoute: HotelsRoute,
   PlannerRoute: PlannerRoute,
+  SavedRoute: SavedRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

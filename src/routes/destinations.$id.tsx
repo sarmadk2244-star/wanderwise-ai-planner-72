@@ -6,6 +6,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Gallery } from "@/components/site/Gallery";
+import { BookingPanel } from "@/components/site/BookingPanel";
 
 export const Route = createFileRoute("/destinations/$id")({
   loader: ({ params }) => {
@@ -184,6 +185,11 @@ function DestinationPage() {
             <p className="mt-3 text-foreground/80">{d.culture}</p>
           </div>
         </section>
+
+        {/* Booking & transport */}
+        <BookingPanel d={d} />
+
+
 
         {/* CTA */}
         <section className="mt-20 overflow-hidden rounded-4xl bg-gradient-aurora p-10 text-white shadow-glow md:p-16">
