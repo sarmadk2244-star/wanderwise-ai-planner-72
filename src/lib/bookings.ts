@@ -37,17 +37,17 @@ function writeLocal(items: SavedItem[]) {
 
 function rowToItem(r: {
   item_key: string;
-  type: SavedItem["type"];
+  type: string;
   title: string;
   subtitle: string | null;
   url: string | null;
   image: string | null;
-  meta: Record<string, unknown> | null;
+  meta: unknown;
   created_at: string;
 }): SavedItem {
   return {
     id: r.item_key,
-    type: r.type,
+    type: r.type as SavedItem["type"],
     title: r.title,
     subtitle: r.subtitle ?? undefined,
     url: r.url ?? undefined,
