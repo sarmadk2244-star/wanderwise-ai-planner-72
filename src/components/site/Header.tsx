@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon } from "lucide-react";
+import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useSaved } from "@/lib/bookings";
 import { useAuthUser } from "@/hooks/use-auth-user";
+import { NotificationBell } from "@/components/site/NotificationBell";
 import { toast } from "sonner";
 
 const links = [
@@ -13,6 +14,7 @@ const links = [
   { to: "/hotels", label: "Hotels" },
   { to: "/planner", label: "AI Planner" },
   { to: "/saved", label: "Saved" },
+  { to: "/dashboard", label: "Dashboard" },
 ];
 
 export function Header() {
@@ -48,6 +50,7 @@ export function Header() {
           </nav>
           <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
+            <NotificationBell />
             <Link to="/saved" className="relative grid h-9 w-9 place-items-center rounded-full hover:bg-accent" aria-label="Save Center">
               <Bookmark className="h-4 w-4" />
               {savedCount > 0 && (
@@ -57,9 +60,14 @@ export function Header() {
               )}
             </Link>
             {user ? (
-              <Button variant="outline" size="sm" className="rounded-full" onClick={handleSignOut} title={user.email ?? ""}>
-                <LogOut className="mr-1.5 h-3.5 w-3.5" /> Sign out
-              </Button>
+              <>
+                <Link to="/dashboard" className="grid h-9 w-9 place-items-center rounded-full hover:bg-accent" aria-label="Dashboard">
+                  <LayoutDashboard className="h-4 w-4" />
+                </Link>
+                <Button variant="outline" size="sm" className="rounded-full" onClick={handleSignOut} title={user.email ?? ""}>
+                  <LogOut className="mr-1.5 h-3.5 w-3.5" /> Sign out
+                </Button>
+              </>
             ) : (
               <Button asChild variant="outline" size="sm" className="rounded-full">
                 <Link to="/auth"><UserIcon className="mr-1.5 h-3.5 w-3.5" /> Sign in</Link>
