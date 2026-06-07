@@ -50,6 +50,7 @@ export function Header() {
           </nav>
           <div className="hidden items-center gap-2 md:flex">
             <ThemeToggle />
+            <NotificationBell />
             <Link to="/saved" className="relative grid h-9 w-9 place-items-center rounded-full hover:bg-accent" aria-label="Save Center">
               <Bookmark className="h-4 w-4" />
               {savedCount > 0 && (
@@ -59,6 +60,10 @@ export function Header() {
               )}
             </Link>
             {user ? (
+              <>
+                <Link to="/dashboard" className="grid h-9 w-9 place-items-center rounded-full hover:bg-accent" aria-label="Dashboard">
+                  <LayoutDashboard className="h-4 w-4" />
+                </Link>
               <Button variant="outline" size="sm" className="rounded-full" onClick={handleSignOut} title={user.email ?? ""}>
                 <LogOut className="mr-1.5 h-3.5 w-3.5" /> Sign out
               </Button>
