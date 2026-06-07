@@ -1,6 +1,7 @@
-import { ExternalLink, Bookmark, BookmarkCheck, Hotel, Plane, Bus, Home, Camera } from "lucide-react";
+import { ExternalLink, Bookmark, BookmarkCheck, Hotel, Plane, Bus, Home, Camera, CalendarCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useSaved, bookingLinks, type SavedItem } from "@/lib/bookings";
+import { BookingFormDialog } from "@/components/site/BookingFormDialog";
 import { toast } from "sonner";
 import type { Destination } from "@/lib/data/destinations";
 
