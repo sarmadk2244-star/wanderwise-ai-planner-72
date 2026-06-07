@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon } from "lucide-react";
+import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon, LayoutDashboard } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useSaved } from "@/lib/bookings";
 import { useAuthUser } from "@/hooks/use-auth-user";
+import { NotificationBell } from "@/components/site/NotificationBell";
 import { toast } from "sonner";
 
 const links = [
@@ -13,6 +14,7 @@ const links = [
   { to: "/hotels", label: "Hotels" },
   { to: "/planner", label: "AI Planner" },
   { to: "/saved", label: "Saved" },
+  { to: "/dashboard", label: "Dashboard" },
 ];
 
 export function Header() {
