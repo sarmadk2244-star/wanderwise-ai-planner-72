@@ -1,7 +1,8 @@
-import { Star, MapPin, ExternalLink, Bookmark, BookmarkCheck } from "lucide-react";
+import { Star, MapPin, CalendarCheck, Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Hotel } from "@/lib/data/hotels";
 import { bookingLinks, useSaved } from "@/lib/bookings";
+import { BookingFormDialog } from "@/components/site/BookingFormDialog";
 import { toast } from "sonner";
 
 export function HotelCard({ h }: { h: Hotel }) {
