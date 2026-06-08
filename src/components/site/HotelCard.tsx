@@ -1,7 +1,8 @@
-import { Star, MapPin, ExternalLink, Bookmark, BookmarkCheck } from "lucide-react";
+import { Star, MapPin, CalendarCheck, Bookmark, BookmarkCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { Hotel } from "@/lib/data/hotels";
 import { bookingLinks, useSaved } from "@/lib/bookings";
+import { BookingFormDialog } from "@/components/site/BookingFormDialog";
 import { toast } from "sonner";
 
 export function HotelCard({ h }: { h: Hotel }) {
@@ -69,11 +70,16 @@ export function HotelCard({ h }: { h: Hotel }) {
             <div className="font-display text-3xl text-gradient-sunset">${h.pricePerNight}</div>
             <div className="text-[11px] text-muted-foreground">per night · {h.reviews.toLocaleString()} reviews</div>
           </div>
-          <Button asChild className="rounded-full bg-gradient-sunset text-primary-foreground hover:opacity-95">
-            <a href={bookingUrl} target="_blank" rel="noopener noreferrer">
-              Book <ExternalLink className="ml-1.5 h-3.5 w-3.5" />
-            </a>
-          </Button>
+          <BookingFormDialog
+            defaultTourPlace={h.name}
+            defaultCountry={h.city}
+            trigger={
+              <Button className="rounded-full bg-gradient-sunset text-primary-foreground hover:opacity-95">
+                <CalendarCheck className="mr-1.5 h-3.5 w-3.5" /> Book
+              </Button>
+            }
+          />
+
         </div>
       </div>
     </article>
