@@ -1,0 +1,1 @@
+CREATE POLICY "Users delete own prefs" ON public.notification_preferences FOR DELETE USING (auth.uid() = user_id);
