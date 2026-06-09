@@ -108,7 +108,6 @@ const make = (s: Seed): Destination => ({
 const pakistan: Destination[] = [
   make({
     id: "hunza", city: "Hunza", country: "Pakistan", region: "Pakistan",
-    image: hunza,
     tagline: "Turquoise lakes beneath the Karakoram",
     description: "A high-altitude valley framed by 7,000m peaks, with apricot orchards, ancient forts, and the legendary Attabad Lake glowing turquoise year-round.",
     bestSeason: "April – October",
@@ -228,7 +227,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "murree", city: "Murree", country: "Pakistan", region: "Pakistan",
-    image: islamabad,
     tagline: "Pine-scented hill station near Islamabad",
     description: "Quintessential weekend escape from Islamabad — colonial Mall Road, chairlifts, and pine forests at 2,300m.",
     bestSeason: "Year-round",
@@ -246,7 +244,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "lahore", city: "Lahore", country: "Pakistan", region: "Pakistan",
-    image: lahore,
     tagline: "Mughal heritage and street food capital",
     description: "The cultural heart of Pakistan — Mughal gardens, Sufi shrines, the world's largest mosque courtyard, and arguably the subcontinent's best food street.",
     bestSeason: "October – March",
@@ -264,7 +261,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "islamabad", city: "Islamabad", country: "Pakistan", region: "Pakistan",
-    image: islamabad,
     tagline: "Capital of green hills and clean boulevards",
     description: "Pakistan's planned capital — leafy boulevards, Margalla hiking trails, and the iconic Faisal Mosque set against the foothills.",
     bestSeason: "September – April",
@@ -282,7 +278,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "karachi", city: "Karachi", country: "Pakistan", region: "Pakistan",
-    image: lahore,
     tagline: "City of lights by the Arabian Sea",
     description: "Pakistan's largest city — a chaotic, beautiful megalopolis of beaches, colonial bones, cosmopolitan dining, and 24/7 energy.",
     bestSeason: "November – February",
@@ -423,7 +418,6 @@ const pakistan: Destination[] = [
 const international: Destination[] = [
   make({
     id: "dubai", city: "Dubai", country: "UAE", region: "International",
-    image: dubai,
     tagline: "Skyline of dreams and golden dunes",
     description: "A futuristic skyline rising from the desert — record-breaking skyscrapers, palm-shaped islands, world-class shopping, and dune safaris.",
     bestSeason: "November – March",
@@ -464,7 +458,6 @@ const international: Destination[] = [
   }),
   make({
     id: "istanbul", city: "Istanbul", country: "Turkey", region: "International",
-    image: turkey,
     tagline: "Where continents and centuries meet",
     description: "The only city straddling two continents — Byzantine cathedrals, Ottoman mosques, Bosphorus ferries, and one of the world's greatest food scenes.",
     bestSeason: "April – June, September – October",
@@ -745,7 +738,6 @@ const international: Destination[] = [
   }),
   make({
     id: "bangkok", city: "Bangkok", country: "Thailand", region: "International",
-    image: thailand,
     tagline: "Temples, tuk-tuks, and street food paradise",
     description: "Sensory overload in the best way — gilded temples, hidden rooftop bars, the world's best street food, and chaotic charm.",
     bestSeason: "November – February",
@@ -886,7 +878,6 @@ const international: Destination[] = [
   }),
   make({
     id: "makkah", city: "Makkah", country: "Saudi Arabia", region: "International",
-    image: dubai,
     tagline: "Holiest city in Islam",
     description: "Home to the Kaaba and Masjid al-Haram — the spiritual center of the Muslim world and destination for Hajj and Umrah.",
     bestSeason: "October – March",
@@ -907,7 +898,6 @@ const international: Destination[] = [
   }),
   make({
     id: "madinah", city: "Madinah", country: "Saudi Arabia", region: "International",
-    image: dubai,
     tagline: "The radiant city of the Prophet ﷺ",
     description: "Second holiest city in Islam, home to Masjid an-Nabawi where the Prophet ﷺ is buried — a place of serenity, prayer, and reflection.",
     bestSeason: "October – March",
