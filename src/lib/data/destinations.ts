@@ -1,9 +1,56 @@
-import lahore from "@/assets/dest-lahore.jpg";
-import islamabad from "@/assets/dest-islamabad.jpg";
-import hunza from "@/assets/dest-hunza.jpg";
-import dubai from "@/assets/dest-dubai.jpg";
-import turkey from "@/assets/dest-turkey.jpg";
-import thailand from "@/assets/dest-thailand.jpg";
+import hunza from "@/assets/dest/hunza.jpg";
+import skardu from "@/assets/dest/skardu.jpg";
+import gilgit from "@/assets/dest/gilgit.jpg";
+import fairyMeadows from "@/assets/dest/fairy-meadows.jpg";
+import naran from "@/assets/dest/naran.jpg";
+import kaghan from "@/assets/dest/kaghan.jpg";
+import swat from "@/assets/dest/swat.jpg";
+import murree from "@/assets/dest/murree.jpg";
+import lahore from "@/assets/dest/lahore.jpg";
+import islamabad from "@/assets/dest/islamabad.jpg";
+import karachi from "@/assets/dest/karachi.jpg";
+import multan from "@/assets/dest/multan.jpg";
+import peshawar from "@/assets/dest/peshawar.jpg";
+import neelumValley from "@/assets/dest/neelum-valley.jpg";
+import shogran from "@/assets/dest/shogran.jpg";
+import kumratValley from "@/assets/dest/kumrat-valley.jpg";
+import chitral from "@/assets/dest/chitral.jpg";
+import gwadar from "@/assets/dest/gwadar.jpg";
+import dubai from "@/assets/dest/dubai.jpg";
+import abuDhabi from "@/assets/dest/abu-dhabi.jpg";
+import istanbul from "@/assets/dest/istanbul.jpg";
+import cappadocia from "@/assets/dest/cappadocia.jpg";
+import paris from "@/assets/dest/paris.jpg";
+import london from "@/assets/dest/london.jpg";
+import rome from "@/assets/dest/rome.jpg";
+import venice from "@/assets/dest/venice.jpg";
+import barcelona from "@/assets/dest/barcelona.jpg";
+import madrid from "@/assets/dest/madrid.jpg";
+import newYork from "@/assets/dest/new-york.jpg";
+import losAngeles from "@/assets/dest/los-angeles.jpg";
+import tokyo from "@/assets/dest/tokyo.jpg";
+import kyoto from "@/assets/dest/kyoto.jpg";
+import singapore from "@/assets/dest/singapore.jpg";
+import kualaLumpur from "@/assets/dest/kuala-lumpur.jpg";
+import bangkok from "@/assets/dest/bangkok.jpg";
+import maldives from "@/assets/dest/maldives.jpg";
+import bali from "@/assets/dest/bali.jpg";
+import switzerland from "@/assets/dest/switzerland.jpg";
+import amsterdam from "@/assets/dest/amsterdam.jpg";
+import seoul from "@/assets/dest/seoul.jpg";
+import doha from "@/assets/dest/doha.jpg";
+import makkah from "@/assets/dest/makkah.jpg";
+import madinah from "@/assets/dest/madinah.jpg";
+
+const heroById: Record<string, string> = {
+  hunza, skardu, gilgit, "fairy-meadows": fairyMeadows, naran, kaghan, swat, murree,
+  lahore, islamabad, karachi, multan, peshawar,
+  "neelum-valley": neelumValley, shogran, "kumrat-valley": kumratValley, chitral, gwadar,
+  dubai, "abu-dhabi": abuDhabi, istanbul, cappadocia, paris, london, rome, venice,
+  barcelona, madrid, "new-york": newYork, "los-angeles": losAngeles, tokyo, kyoto,
+  singapore, "kuala-lumpur": kualaLumpur, bangkok, maldives, bali, switzerland,
+  amsterdam, seoul, doha, makkah, madinah,
+};
 
 /**
  * Returns a URL to a real Flickr photo matching the tag.
@@ -53,7 +100,7 @@ type Seed = Omit<Destination, "image" | "gallery"> & {
 
 const make = (s: Seed): Destination => ({
   ...s,
-  image: s.image ?? ux(`${s.city},${s.country},famous landmark`, 1600, 1100, `${s.id}-hero`),
+  image: s.image ?? heroById[s.id] ?? ux(`${s.city},${s.country},famous landmark`, 1600, 1100, `${s.id}-hero`),
   gallery: s.gallery ?? galleryFor(`${s.city} ${s.country}`, defaultThemes),
 });
 
@@ -61,7 +108,6 @@ const make = (s: Seed): Destination => ({
 const pakistan: Destination[] = [
   make({
     id: "hunza", city: "Hunza", country: "Pakistan", region: "Pakistan",
-    image: hunza,
     tagline: "Turquoise lakes beneath the Karakoram",
     description: "A high-altitude valley framed by 7,000m peaks, with apricot orchards, ancient forts, and the legendary Attabad Lake glowing turquoise year-round.",
     bestSeason: "April – October",
@@ -181,7 +227,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "murree", city: "Murree", country: "Pakistan", region: "Pakistan",
-    image: islamabad,
     tagline: "Pine-scented hill station near Islamabad",
     description: "Quintessential weekend escape from Islamabad — colonial Mall Road, chairlifts, and pine forests at 2,300m.",
     bestSeason: "Year-round",
@@ -199,7 +244,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "lahore", city: "Lahore", country: "Pakistan", region: "Pakistan",
-    image: lahore,
     tagline: "Mughal heritage and street food capital",
     description: "The cultural heart of Pakistan — Mughal gardens, Sufi shrines, the world's largest mosque courtyard, and arguably the subcontinent's best food street.",
     bestSeason: "October – March",
@@ -217,7 +261,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "islamabad", city: "Islamabad", country: "Pakistan", region: "Pakistan",
-    image: islamabad,
     tagline: "Capital of green hills and clean boulevards",
     description: "Pakistan's planned capital — leafy boulevards, Margalla hiking trails, and the iconic Faisal Mosque set against the foothills.",
     bestSeason: "September – April",
@@ -235,7 +278,6 @@ const pakistan: Destination[] = [
   }),
   make({
     id: "karachi", city: "Karachi", country: "Pakistan", region: "Pakistan",
-    image: lahore,
     tagline: "City of lights by the Arabian Sea",
     description: "Pakistan's largest city — a chaotic, beautiful megalopolis of beaches, colonial bones, cosmopolitan dining, and 24/7 energy.",
     bestSeason: "November – February",
@@ -376,7 +418,6 @@ const pakistan: Destination[] = [
 const international: Destination[] = [
   make({
     id: "dubai", city: "Dubai", country: "UAE", region: "International",
-    image: dubai,
     tagline: "Skyline of dreams and golden dunes",
     description: "A futuristic skyline rising from the desert — record-breaking skyscrapers, palm-shaped islands, world-class shopping, and dune safaris.",
     bestSeason: "November – March",
@@ -417,7 +458,6 @@ const international: Destination[] = [
   }),
   make({
     id: "istanbul", city: "Istanbul", country: "Turkey", region: "International",
-    image: turkey,
     tagline: "Where continents and centuries meet",
     description: "The only city straddling two continents — Byzantine cathedrals, Ottoman mosques, Bosphorus ferries, and one of the world's greatest food scenes.",
     bestSeason: "April – June, September – October",
@@ -698,7 +738,6 @@ const international: Destination[] = [
   }),
   make({
     id: "bangkok", city: "Bangkok", country: "Thailand", region: "International",
-    image: thailand,
     tagline: "Temples, tuk-tuks, and street food paradise",
     description: "Sensory overload in the best way — gilded temples, hidden rooftop bars, the world's best street food, and chaotic charm.",
     bestSeason: "November – February",
@@ -839,7 +878,6 @@ const international: Destination[] = [
   }),
   make({
     id: "makkah", city: "Makkah", country: "Saudi Arabia", region: "International",
-    image: dubai,
     tagline: "Holiest city in Islam",
     description: "Home to the Kaaba and Masjid al-Haram — the spiritual center of the Muslim world and destination for Hajj and Umrah.",
     bestSeason: "October – March",
@@ -860,7 +898,6 @@ const international: Destination[] = [
   }),
   make({
     id: "madinah", city: "Madinah", country: "Saudi Arabia", region: "International",
-    image: dubai,
     tagline: "The radiant city of the Prophet ﷺ",
     description: "Second holiest city in Islam, home to Masjid an-Nabawi where the Prophet ﷺ is buried — a place of serenity, prayer, and reflection.",
     bestSeason: "October – March",
