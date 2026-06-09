@@ -131,10 +131,11 @@ function DestinationPage() {
             <div>
               <span className="text-xs uppercase tracking-widest text-primary">Gallery</span>
               <h2 className="mt-2 font-display text-4xl">Through the lens</h2>
+              <p className="mt-2 text-sm text-muted-foreground">Tap any photo to open the full-screen viewer.</p>
             </div>
-            <span className="text-sm text-muted-foreground">{d.gallery.length} photos</span>
+            <span className="text-sm text-muted-foreground">{[d.image, ...d.gallery].length} photos</span>
           </div>
-          <Gallery images={d.gallery} alt={`${d.city}, ${d.country}`} />
+          <Gallery images={[d.image, ...d.gallery]} alt={`${d.city}, ${d.country}`} />
         </section>
 
         {/* Weather & Budget */}
