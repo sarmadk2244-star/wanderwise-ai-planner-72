@@ -1,9 +1,56 @@
-import lahore from "@/assets/dest-lahore.jpg";
-import islamabad from "@/assets/dest-islamabad.jpg";
-import hunza from "@/assets/dest-hunza.jpg";
-import dubai from "@/assets/dest-dubai.jpg";
-import turkey from "@/assets/dest-turkey.jpg";
-import thailand from "@/assets/dest-thailand.jpg";
+import hunza from "@/assets/dest/hunza.jpg";
+import skardu from "@/assets/dest/skardu.jpg";
+import gilgit from "@/assets/dest/gilgit.jpg";
+import fairyMeadows from "@/assets/dest/fairy-meadows.jpg";
+import naran from "@/assets/dest/naran.jpg";
+import kaghan from "@/assets/dest/kaghan.jpg";
+import swat from "@/assets/dest/swat.jpg";
+import murree from "@/assets/dest/murree.jpg";
+import lahore from "@/assets/dest/lahore.jpg";
+import islamabad from "@/assets/dest/islamabad.jpg";
+import karachi from "@/assets/dest/karachi.jpg";
+import multan from "@/assets/dest/multan.jpg";
+import peshawar from "@/assets/dest/peshawar.jpg";
+import neelumValley from "@/assets/dest/neelum-valley.jpg";
+import shogran from "@/assets/dest/shogran.jpg";
+import kumratValley from "@/assets/dest/kumrat-valley.jpg";
+import chitral from "@/assets/dest/chitral.jpg";
+import gwadar from "@/assets/dest/gwadar.jpg";
+import dubai from "@/assets/dest/dubai.jpg";
+import abuDhabi from "@/assets/dest/abu-dhabi.jpg";
+import istanbul from "@/assets/dest/istanbul.jpg";
+import cappadocia from "@/assets/dest/cappadocia.jpg";
+import paris from "@/assets/dest/paris.jpg";
+import london from "@/assets/dest/london.jpg";
+import rome from "@/assets/dest/rome.jpg";
+import venice from "@/assets/dest/venice.jpg";
+import barcelona from "@/assets/dest/barcelona.jpg";
+import madrid from "@/assets/dest/madrid.jpg";
+import newYork from "@/assets/dest/new-york.jpg";
+import losAngeles from "@/assets/dest/los-angeles.jpg";
+import tokyo from "@/assets/dest/tokyo.jpg";
+import kyoto from "@/assets/dest/kyoto.jpg";
+import singapore from "@/assets/dest/singapore.jpg";
+import kualaLumpur from "@/assets/dest/kuala-lumpur.jpg";
+import bangkok from "@/assets/dest/bangkok.jpg";
+import maldives from "@/assets/dest/maldives.jpg";
+import bali from "@/assets/dest/bali.jpg";
+import switzerland from "@/assets/dest/switzerland.jpg";
+import amsterdam from "@/assets/dest/amsterdam.jpg";
+import seoul from "@/assets/dest/seoul.jpg";
+import doha from "@/assets/dest/doha.jpg";
+import makkah from "@/assets/dest/makkah.jpg";
+import madinah from "@/assets/dest/madinah.jpg";
+
+const heroById: Record<string, string> = {
+  hunza, skardu, gilgit, "fairy-meadows": fairyMeadows, naran, kaghan, swat, murree,
+  lahore, islamabad, karachi, multan, peshawar,
+  "neelum-valley": neelumValley, shogran, "kumrat-valley": kumratValley, chitral, gwadar,
+  dubai, "abu-dhabi": abuDhabi, istanbul, cappadocia, paris, london, rome, venice,
+  barcelona, madrid, "new-york": newYork, "los-angeles": losAngeles, tokyo, kyoto,
+  singapore, "kuala-lumpur": kualaLumpur, bangkok, maldives, bali, switzerland,
+  amsterdam, seoul, doha, makkah, madinah,
+};
 
 /**
  * Returns a URL to a real Flickr photo matching the tag.
