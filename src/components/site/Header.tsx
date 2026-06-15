@@ -23,6 +23,7 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const { items } = useSaved();
   const { user, signOut } = useAuthUser();
+  const { isAdmin } = useIsAdmin();
   const savedCount = items.length;
   const handleSignOut = async () => {
     await signOut();
