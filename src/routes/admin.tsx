@@ -2,6 +2,11 @@ import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-rout
 import { useAuthUser } from "@/hooks/use-auth-user";
 import { useIsAdmin } from "@/hooks/use-is-admin";
 import { useEffect } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { useMutation } from "@tanstack/react-query";
+import { claimFirstAdmin } from "@/lib/admin.functions";
+import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 import {
   LayoutDashboard,
   Calendar,
@@ -9,6 +14,7 @@ import {
   Users,
   Send,
   ShieldAlert,
+  ShieldCheck,
 } from "lucide-react";
 
 export const Route = createFileRoute("/admin")({
