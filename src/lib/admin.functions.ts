@@ -186,6 +186,6 @@ export const adminGetStats = createServerFn({ method: "GET" })
       bookingsByStatus,
       totalContacts: contacts.count ?? 0,
       openContacts,
-      totalUsers: users.data?.total ?? 0,
+      totalUsers: (users.data as any)?.total ?? users.data?.users?.length ?? 0,
     };
   });
