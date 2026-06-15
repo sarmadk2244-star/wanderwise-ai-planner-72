@@ -49,11 +49,11 @@ export const adminUpdateBookingStatus = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     await assertAdmin(context);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const update: Record<string, unknown> = { status: data.status };
+    const update: { status: string; notes?: string } = { status: data.status };
     if (data.notes !== undefined) update.notes = data.notes;
     const { data: row, error } = await supabaseAdmin
       .from("bookings")
-      .update(update)
+      .update(update as any)
       .eq("id", data.id)
       .select()
       .single();
