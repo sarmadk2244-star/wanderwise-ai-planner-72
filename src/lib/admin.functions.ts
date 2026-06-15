@@ -189,3 +189,21 @@ export const adminGetStats = createServerFn({ method: "GET" })
       totalUsers: (users.data as any)?.total ?? users.data?.users?.length ?? 0,
     };
   });
+
+// One-time bootstrap: claim admin if no admin exists yet
+export const claimFirstAdmin = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .handler(async ({ context }) => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { count, error: cErr } = await supabaseAdmin
+      .from("user_roles")
+      .select("id", { count: "exact", head: true })
+      .eq("role", "admin");
+    if (cErr) throw new Error(cErr.message);
+    if ((count ?? 0) > 0) throw new Error("An admin already exists. Ask them to grant you access.");
+    const { error } = await supabaseAdmin
+      .from("user_roles")
+      .insert({ user_id: context.userId, role: "admin" });
+    if (error) throw new Error(error.message);
+    return { ok: true };
+  });
