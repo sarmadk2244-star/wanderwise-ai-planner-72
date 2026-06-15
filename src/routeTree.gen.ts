@@ -19,6 +19,7 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
+import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 import { Route as ApiPublicHooksBookingRemindersRouteImport } from './routes/api/public/hooks/booking-reminders'
 
@@ -72,6 +73,11 @@ const DestinationsIdRoute = DestinationsIdRouteImport.update({
   path: '/$id',
   getParentRoute: () => DestinationsRoute,
 } as any)
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminBookingsRoute = AdminBookingsRouteImport.update({
   id: '/bookings',
   path: '/bookings',
@@ -94,6 +100,7 @@ export interface FileRoutesByFullPath {
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
   '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/messages': typeof AdminMessagesRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
@@ -107,6 +114,7 @@ export interface FileRoutesByTo {
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
   '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/messages': typeof AdminMessagesRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/admin': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
@@ -122,6 +130,7 @@ export interface FileRoutesById {
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
   '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/messages': typeof AdminMessagesRoute
   '/destinations/$id': typeof DestinationsIdRoute
   '/admin/': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
@@ -138,6 +147,7 @@ export interface FileRouteTypes {
     | '/planner'
     | '/saved'
     | '/admin/bookings'
+    | '/admin/messages'
     | '/destinations/$id'
     | '/admin/'
     | '/api/public/hooks/booking-reminders'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/planner'
     | '/saved'
     | '/admin/bookings'
+    | '/admin/messages'
     | '/destinations/$id'
     | '/admin'
     | '/api/public/hooks/booking-reminders'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/planner'
     | '/saved'
     | '/admin/bookings'
+    | '/admin/messages'
     | '/destinations/$id'
     | '/admin/'
     | '/api/public/hooks/booking-reminders'
@@ -254,6 +266,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DestinationsIdRouteImport
       parentRoute: typeof DestinationsRoute
     }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/bookings': {
       id: '/admin/bookings'
       path: '/bookings'
@@ -273,11 +292,13 @@ declare module '@tanstack/react-router' {
 
 interface AdminRouteChildren {
   AdminBookingsRoute: typeof AdminBookingsRoute
+  AdminMessagesRoute: typeof AdminMessagesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminBookingsRoute: AdminBookingsRoute,
+  AdminMessagesRoute: AdminMessagesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
