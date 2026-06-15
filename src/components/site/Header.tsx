@@ -1,10 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon, LayoutDashboard } from "lucide-react";
+import { Compass, Menu, X, Bookmark, LogOut, User as UserIcon, LayoutDashboard, Shield } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 import { useSaved } from "@/lib/bookings";
 import { useAuthUser } from "@/hooks/use-auth-user";
+import { useIsAdmin } from "@/hooks/use-is-admin";
 import { NotificationBell } from "@/components/site/NotificationBell";
 import { toast } from "sonner";
 
@@ -15,6 +16,7 @@ const links = [
   { to: "/planner", label: "AI Planner" },
   { to: "/saved", label: "Saved" },
   { to: "/dashboard", label: "Dashboard" },
+  { to: "/contact", label: "Contact" },
 ];
 
 export function Header() {
