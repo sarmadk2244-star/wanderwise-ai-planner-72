@@ -77,7 +77,7 @@ function AdminLayout() {
               return (
                 <Link
                   key={item.to}
-                  to={item.to}
+                  to={item.to as never}
                   className="flex items-center gap-2 whitespace-nowrap rounded-xl px-3 py-2 text-sm hover:bg-accent"
                   activeProps={{ className: "bg-accent text-primary font-medium" }}
                   activeOptions={{ exact: item.exact ?? false }}
