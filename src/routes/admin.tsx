@@ -34,6 +34,15 @@ function AdminLayout() {
   const { user, loading: authLoading } = useAuthUser();
   const { isAdmin, loading: roleLoading } = useIsAdmin();
   const navigate = useNavigate();
+  const claimFn = useServerFn(claimFirstAdmin);
+  const claimMut = useMutation({
+    mutationFn: () => claimFn(),
+    onSuccess: () => {
+      toast.success("You're now an admin. Reloading…");
+      setTimeout(() => window.location.reload(), 600);
+    },
+    onError: (e: Error) => toast.error(e.message),
+  });
 
   useEffect(() => {
     if (!authLoading && !user) navigate({ to: "/auth" });
@@ -56,12 +65,21 @@ function AdminLayout() {
           <ShieldAlert className="mx-auto h-10 w-10 text-destructive" />
           <h1 className="mt-4 font-display text-3xl">Admin access required</h1>
           <p className="mt-2 text-sm text-muted-foreground">
-            Your account ({user.email}) doesn't have admin privileges. Ask an existing admin
-            to grant you the role, or grant your account admin directly in the backend.
+            Your account ({user.email}) doesn't have admin privileges. If this is a fresh
+            site with no admins yet, you can claim the first admin role below. Otherwise,
+            ask an existing admin to grant you access.
           </p>
           <p className="mt-3 break-all rounded-md bg-muted/40 p-3 text-xs font-mono">
             Your user id: {user.id}
           </p>
+          <Button
+            className="mt-5 rounded-full bg-gradient-sunset text-primary-foreground shadow-glow"
+            onClick={() => claimMut.mutate()}
+            disabled={claimMut.isPending}
+          >
+            <ShieldCheck className="mr-2 h-4 w-4" />
+            {claimMut.isPending ? "Claiming…" : "Claim first admin role"}
+          </Button>
         </div>
       </div>
     );
