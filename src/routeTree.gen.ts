@@ -14,9 +14,16 @@ import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as HotelsRouteImport } from './routes/hotels'
 import { Route as DestinationsRouteImport } from './routes/destinations'
 import { Route as DashboardRouteImport } from './routes/dashboard'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
+import { Route as AdminSendRouteImport } from './routes/admin.send'
+import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
+import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 import { Route as ApiPublicHooksBookingRemindersRouteImport } from './routes/api/public/hooks/booking-reminders'
 
 const SavedRoute = SavedRouteImport.update({
@@ -44,9 +51,19 @@ const DashboardRoute = DashboardRouteImport.update({
   path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -54,10 +71,35 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const DestinationsIdRoute = DestinationsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => DestinationsRoute,
+} as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminSendRoute = AdminSendRouteImport.update({
+  id: '/send',
+  path: '/send',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AdminRoute,
 } as any)
 const ApiPublicHooksBookingRemindersRoute =
   ApiPublicHooksBookingRemindersRouteImport.update({
@@ -68,77 +110,119 @@ const ApiPublicHooksBookingRemindersRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/send': typeof AdminSendRoute
+  '/admin/users': typeof AdminUsersRoute
   '/destinations/$id': typeof DestinationsIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/send': typeof AdminSendRoute
+  '/admin/users': typeof AdminUsersRoute
   '/destinations/$id': typeof DestinationsIdRoute
+  '/admin': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
   '/destinations': typeof DestinationsRouteWithChildren
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
+  '/admin/bookings': typeof AdminBookingsRoute
+  '/admin/messages': typeof AdminMessagesRoute
+  '/admin/send': typeof AdminSendRoute
+  '/admin/users': typeof AdminUsersRoute
   '/destinations/$id': typeof DestinationsIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/auth'
+    | '/contact'
     | '/dashboard'
     | '/destinations'
     | '/hotels'
     | '/planner'
     | '/saved'
+    | '/admin/bookings'
+    | '/admin/messages'
+    | '/admin/send'
+    | '/admin/users'
     | '/destinations/$id'
+    | '/admin/'
     | '/api/public/hooks/booking-reminders'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/contact'
     | '/dashboard'
     | '/destinations'
     | '/hotels'
     | '/planner'
     | '/saved'
+    | '/admin/bookings'
+    | '/admin/messages'
+    | '/admin/send'
+    | '/admin/users'
     | '/destinations/$id'
+    | '/admin'
     | '/api/public/hooks/booking-reminders'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/auth'
+    | '/contact'
     | '/dashboard'
     | '/destinations'
     | '/hotels'
     | '/planner'
     | '/saved'
+    | '/admin/bookings'
+    | '/admin/messages'
+    | '/admin/send'
+    | '/admin/users'
     | '/destinations/$id'
+    | '/admin/'
     | '/api/public/hooks/booking-reminders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
   DestinationsRoute: typeof DestinationsRouteWithChildren
   HotelsRoute: typeof HotelsRoute
@@ -184,11 +268,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/auth': {
       id: '/auth'
       path: '/auth'
       fullPath: '/auth'
       preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -198,12 +296,47 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/destinations/$id': {
       id: '/destinations/$id'
       path: '/$id'
       fullPath: '/destinations/$id'
       preLoaderRoute: typeof DestinationsIdRouteImport
       parentRoute: typeof DestinationsRoute
+    }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/send': {
+      id: '/admin/send'
+      path: '/send'
+      fullPath: '/admin/send'
+      preLoaderRoute: typeof AdminSendRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof AdminRoute
     }
     '/api/public/hooks/booking-reminders': {
       id: '/api/public/hooks/booking-reminders'
@@ -214,6 +347,24 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface AdminRouteChildren {
+  AdminBookingsRoute: typeof AdminBookingsRoute
+  AdminMessagesRoute: typeof AdminMessagesRoute
+  AdminSendRoute: typeof AdminSendRoute
+  AdminUsersRoute: typeof AdminUsersRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminBookingsRoute: AdminBookingsRoute,
+  AdminMessagesRoute: AdminMessagesRoute,
+  AdminSendRoute: AdminSendRoute,
+  AdminUsersRoute: AdminUsersRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
 interface DestinationsRouteChildren {
   DestinationsIdRoute: typeof DestinationsIdRoute
@@ -229,7 +380,9 @@ const DestinationsRouteWithChildren = DestinationsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
   DestinationsRoute: DestinationsRouteWithChildren,
   HotelsRoute: HotelsRoute,
@@ -240,13 +393,3 @@ const rootRouteChildren: RootRouteChildren = {
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
