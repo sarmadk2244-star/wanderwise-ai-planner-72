@@ -17,6 +17,7 @@ import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as DestinationsIdRouteImport } from './routes/destinations.$id'
 import { Route as ApiPublicHooksBookingRemindersRouteImport } from './routes/api/public/hooks/booking-reminders'
 
@@ -60,6 +61,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
 const DestinationsIdRoute = DestinationsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -74,7 +80,7 @@ const ApiPublicHooksBookingRemindersRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/destinations': typeof DestinationsRouteWithChildren
@@ -82,11 +88,11 @@ export interface FileRoutesByFullPath {
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
   '/destinations/$id': typeof DestinationsIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/destinations': typeof DestinationsRouteWithChildren
@@ -94,12 +100,13 @@ export interface FileRoutesByTo {
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
   '/destinations/$id': typeof DestinationsIdRoute
+  '/admin': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/destinations': typeof DestinationsRouteWithChildren
@@ -107,6 +114,7 @@ export interface FileRoutesById {
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
   '/destinations/$id': typeof DestinationsIdRoute
+  '/admin/': typeof AdminIndexRoute
   '/api/public/hooks/booking-reminders': typeof ApiPublicHooksBookingRemindersRoute
 }
 export interface FileRouteTypes {
@@ -121,11 +129,11 @@ export interface FileRouteTypes {
     | '/planner'
     | '/saved'
     | '/destinations/$id'
+    | '/admin/'
     | '/api/public/hooks/booking-reminders'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/admin'
     | '/auth'
     | '/dashboard'
     | '/destinations'
@@ -133,6 +141,7 @@ export interface FileRouteTypes {
     | '/planner'
     | '/saved'
     | '/destinations/$id'
+    | '/admin'
     | '/api/public/hooks/booking-reminders'
   id:
     | '__root__'
@@ -145,12 +154,13 @@ export interface FileRouteTypes {
     | '/planner'
     | '/saved'
     | '/destinations/$id'
+    | '/admin/'
     | '/api/public/hooks/booking-reminders'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   DestinationsRoute: typeof DestinationsRouteWithChildren
@@ -218,6 +228,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/destinations/$id': {
       id: '/destinations/$id'
       path: '/$id'
@@ -235,6 +252,16 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AdminRouteChildren {
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 interface DestinationsRouteChildren {
   DestinationsIdRoute: typeof DestinationsIdRoute
 }
@@ -249,7 +276,7 @@ const DestinationsRouteWithChildren = DestinationsRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   DestinationsRoute: DestinationsRouteWithChildren,
