@@ -16,13 +16,13 @@ export const Route = createFileRoute("/admin")({
   head: () => ({ meta: [{ title: "Admin · Wayfarer" }] }),
 });
 
-const navItems = [
+const navItems: { to: string; label: string; icon: typeof LayoutDashboard; exact?: boolean }[] = [
   { to: "/admin", label: "Overview", icon: LayoutDashboard, exact: true },
   { to: "/admin/bookings", label: "Bookings", icon: Calendar },
   { to: "/admin/messages", label: "Support Inbox", icon: Inbox },
   { to: "/admin/users", label: "Users", icon: Users },
   { to: "/admin/send", label: "Send Message", icon: Send },
-] as const;
+];
 
 function AdminLayout() {
   const { user, loading: authLoading } = useAuthUser();
