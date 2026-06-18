@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TrustRouteImport } from './routes/trust'
 import { Route as SavedRouteImport } from './routes/saved'
 import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as HotelsRouteImport } from './routes/hotels'
@@ -26,6 +27,11 @@ import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 import { Route as ApiPublicHooksBookingRemindersRouteImport } from './routes/api/public/hooks/booking-reminders'
 
+const TrustRoute = TrustRouteImport.update({
+  id: '/trust',
+  path: '/trust',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SavedRoute = SavedRouteImport.update({
   id: '/saved',
   path: '/saved',
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
+  '/trust': typeof TrustRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/send': typeof AdminSendRoute
@@ -135,6 +142,7 @@ export interface FileRoutesByTo {
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
+  '/trust': typeof TrustRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/send': typeof AdminSendRoute
@@ -154,6 +162,7 @@ export interface FileRoutesById {
   '/hotels': typeof HotelsRoute
   '/planner': typeof PlannerRoute
   '/saved': typeof SavedRoute
+  '/trust': typeof TrustRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/admin/send': typeof AdminSendRoute
@@ -174,6 +183,7 @@ export interface FileRouteTypes {
     | '/hotels'
     | '/planner'
     | '/saved'
+    | '/trust'
     | '/admin/bookings'
     | '/admin/messages'
     | '/admin/send'
@@ -191,6 +201,7 @@ export interface FileRouteTypes {
     | '/hotels'
     | '/planner'
     | '/saved'
+    | '/trust'
     | '/admin/bookings'
     | '/admin/messages'
     | '/admin/send'
@@ -209,6 +220,7 @@ export interface FileRouteTypes {
     | '/hotels'
     | '/planner'
     | '/saved'
+    | '/trust'
     | '/admin/bookings'
     | '/admin/messages'
     | '/admin/send'
@@ -228,11 +240,19 @@ export interface RootRouteChildren {
   HotelsRoute: typeof HotelsRoute
   PlannerRoute: typeof PlannerRoute
   SavedRoute: typeof SavedRoute
+  TrustRoute: typeof TrustRoute
   ApiPublicHooksBookingRemindersRoute: typeof ApiPublicHooksBookingRemindersRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/trust': {
+      id: '/trust'
+      path: '/trust'
+      fullPath: '/trust'
+      preLoaderRoute: typeof TrustRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/saved': {
       id: '/saved'
       path: '/saved'
@@ -388,6 +408,7 @@ const rootRouteChildren: RootRouteChildren = {
   HotelsRoute: HotelsRoute,
   PlannerRoute: PlannerRoute,
   SavedRoute: SavedRoute,
+  TrustRoute: TrustRoute,
   ApiPublicHooksBookingRemindersRoute: ApiPublicHooksBookingRemindersRoute,
 }
 export const routeTree = rootRouteImport
