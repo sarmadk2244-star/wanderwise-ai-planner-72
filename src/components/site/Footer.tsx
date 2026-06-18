@@ -35,11 +35,11 @@ export function Footer() {
         <div>
           <h4 className="text-sm font-medium">Company</h4>
           <ul className="mt-4 space-y-2 text-sm text-muted-foreground">
-            <li>About</li>
-            <li>Contact</li>
-            <li>Privacy</li>
+            <li><Link to="/contact">Contact</Link></li>
+            <li><Link to="/trust">Trust & Privacy</Link></li>
           </ul>
         </div>
+
       </div>
       <div className="border-t border-border py-6 text-center text-xs text-muted-foreground">
         © {new Date().getFullYear()} Wayfarer. Crafted with care.
