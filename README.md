@@ -1,252 +1,162 @@
-# Wanderlust AI
+Wayfare — AI Trip Planner
 
-Create a modern, professional, fully responsive AI-powered Trip Planner website with a premium UI/UX design. The website should help users plan trips inside Pakistan and international destinations.
+Wayfare is an AI-powered travel planning web application designed to help users create personalized travel plans based on their destination, budget, trip duration, travel style, and preferences.
 
-Main Features
+The platform brings destination discovery, hotel exploration, budget planning, and itinerary management into one convenient experience.
 
-1. Home Page
+Live Demo
 
-Attractive hero section with travel background
+"Visit Wayfare" (https://wanderwise-ai-planner-72.lovable.app/)
 
-Search bar for destination, budget, dates, and number of travelers
+Overview
 
-AI trip planner assistant
+Planning a trip can involve researching destinations, finding suitable accommodation, estimating expenses, and organizing activities into a practical itinerary.
 
-Popular destinations section
+Wayfare aims to simplify this process by allowing users to customize their travel experience according to their individual requirements and preferences.
 
-Featured hotels and tour packages
+Users can plan different types of trips, including:
 
-Smooth animations and modern design
+- Solo travel
+- Trips with friends
+- Family vacations
+- Honeymoon trips
+- Personalized travel experiences
 
-2. Trip Planning System
+Key Features
 
-Users can:
+AI Trip Planning
 
-Select country and city
+Create personalized trip plans based on selected destinations, budgets, travel styles, duration, and preferences.
 
-Choose travel dates
+Destination Exploration
 
-Enter budget range
+Explore travel destinations and use them as the starting point for planning a trip.
 
-Select trip type:
+Hotel Discovery
 
-Family
+Browse hotel options as part of the trip-planning experience.
 
-Friends
+Budget Planning
 
-Honeymoon
+Set a preferred travel budget and incorporate it into the overall trip plan.
 
-Solo
+Personalized Itineraries
 
-Adventure
+Organize travel plans into structured day-by-day itineraries.
 
-Get AI-generated trip suggestions
+Multiple Travel Styles
 
-3. Pakistan Destinations
+Customize trips according to different travel situations:
 
-Include:
+- Solo
+- Friends
+- Family
+- Honeymoon
 
-Lahore
+Trip Management
 
-Islamabad
+Save and manage planned trips through the application's dashboard.
 
-Karachi
+Tech Stack
 
-Murree
+Wayfare was developed using Lovable and modern web development technologies.
 
-Hunza
+- React 19
+- TypeScript
+- Vite
+- TanStack Start
+- TanStack Router
+- Tailwind CSS
+- Supabase
+- React Hook Form
+- Zod
+- Radix UI
+- Recharts
+- Lucide React
 
-Skardu
+Project Structure
 
-Swat
+wayfare-ai-trip-planner/
+├── public/
+├── src/
+├── package.json
+├── tsconfig.json
+├── vite.config.*
+└── README.md
 
-Faisalabad
+Getting Started
 
-Multan
+Prerequisites
 
-Peshawar
+Make sure you have the following installed:
 
-Each city should contain:
+- Node.js
+- npm
 
-Famous places
+Installation
 
-Hotels
+Install the project dependencies:
 
-Restaurants
+npm install
 
-Weather information
+Start the development server:
 
-Estimated travel cost
-
-Best visiting season
-
-Transport details
-
-4. International Destinations
-
-Include:
-
-Dubai
-
-Turkey
-
-Malaysia
-
-Saudi Arabia
-
-Thailand
-
-UK
-
-USA
-
-Show:
-
-Visa info
-
-Flight estimation
-
-Hotel pricing
-
-Tourist attractions
-
-Currency converter
-
-Travel tips
-
-5. Hotel Booking Section
-
-Hotel cards with images
-
-Ratings and reviews
-
-Price per night
-
-Room details
-
-Booking button
-
-Filter by budget and rating
-
-6. AI Recommendation System
-
-AI should recommend:
-
-Best hotels
-
-Best restaurants
-
-Best time to travel
-
-Budget estimation
-
-Nearby tourist attractions
-
-Suggested travel schedule
-
-7. Interactive Map
-
-Google Maps integration
-
-Show hotels and tourist places on map
-
-Route planning feature
-
-8. Weather System
-
-Live weather updates
-
-Temperature
-
-Forecast
-
-Travel warnings
-
-9. User Authentication
-
-Login / Signup
-
-User dashboard
-
-Saved trips
-
-Booking history
-
-Favorite destinations
-
-10. Advanced Features
-
-Dark/Light mode
-
-Chatbot assistant
-
-Travel expense calculator
-
-Responsive mobile design
-
-Smooth page transitions
-
-Professional animations
-
-SEO optimized
-
-Design Requirements
-
-Premium travel website UI
-
-Modern glassmorphism style
-
-Use gradient colors
-
-Elegant typography
-
-Fully responsive for mobile, tablet, desktop
-
-Clean navbar and footer
-
-Attractive travel cards
-
-Technology Stack
-
-Use:
-
-React.js
-
-Tailwind CSS
-
-Firebase Authentication
-
-Node.js backend
-
-MongoDB database
-
-REST APIs
-
-Framer Motion animations
-
-Extra Requirement
-
-Make the website look like a professional startup product, not a simple student project. Add realistic travel images, smooth animations, and advanced user experience
-
-This project was built with [Lovable](https://lovable.dev).
-
-**Live app**: https://wanderwise-ai-planner-72.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/889768dd-4ffa-4bdc-9fdf-ee3557ef2cd6).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
 npm run dev
-```
+
+The application will be available at the local development URL provided by Vite.
+
+Available Scripts
+
+Development
+
+npm run dev
+
+Starts the development server.
+
+Production Build
+
+npm run build
+
+Builds the application for production.
+
+Lint
+
+npm run lint
+
+Checks the project for linting issues.
+
+Format
+
+npm run format
+
+Formats project files using Prettier.
+
+Project Goals
+
+The goal of Wayfare is to simplify the trip-planning process by bringing destination exploration, hotel discovery, budgeting, and itinerary planning into a single application.
+
+The project focuses on personalization, allowing users to configure their trips according to their destination, budget, travel style, and preferences.
+
+Future Improvements
+
+Potential future improvements include:
+
+- Flight search integration
+- Real-time hotel availability
+- Interactive maps
+- Weather information
+- Advanced expense tracking
+- Collaborative trip planning
+- Mobile application
+- More personalized AI recommendations
+- Travel analytics
+
+Developer
+
+Sarmad Munir
+
+Built as a portfolio project using Lovable and modern web development technologies.
+
+License
+
+This project is currently intended for educational and portfolio purposes.
